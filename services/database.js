@@ -14,6 +14,10 @@ let userConf = {
 let userConn = mysql.createConnection(userConf);
 
 class Database {
+    static async getDeliveries() {
+        return this.query('SELECT * FROM delivery_view');
+    }
+
     static async getPendingPackages() {
         return this.query('SELECT * FROM pending_packages');
     }
