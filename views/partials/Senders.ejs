@@ -1,0 +1,72 @@
+<section>
+    <h1>Senders</h1>
+    <button class="btn btn-success" style="width: fit-content" data-bs-toggle="modal" data-bs-target="#senderModal">
+        New sender
+    </button>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Zipcode</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% senders.forEach(function(sender) { %>
+            <tr>
+                <td><%= sender['id'] %></td>
+                <td><%= sender['name'] %></td>
+                <td><%= sender['address'] %></td>
+                <td><%= sender['zip_code'] %></td>
+                <td><%= sender['phone'] %></td>
+                <td><%= sender['email'] %></td>
+                <td>
+                    <button class="btn btn-outline-danger" id="deleteSender" data-id="<%= sender['id'] %>">Delete</button>
+                </td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+</section>
+
+
+<form class="modal fade" id="senderModal" tabindex="-1" aria-labelledby="senderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="senderModalLabel">New sender</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="senderNameInput" class="form-label">Name</label>
+                    <input type="text" name="name" required class="form-control" id="senderNameInput" placeholder="E.g Proshop">
+                </div>
+                <div class="mb-3">
+                    <label for="senderAddressInput" class="form-label">Address</label>
+                    <input type="text" name="address" required class="form-control" id="senderAddressInput" placeholder="E.g. Nørregade 1">
+                </div>
+                <div class="mb-3">
+                    <label for="senderZipInput" class="form-label">Zipcode</label>
+                    <input type="number" name="zipcode" required class="form-control" id="senderZipInput" placeholder="E.g. 5000">
+                </div>
+                <div class="mb-3">
+                    <label for="senderPhoneInput" class="form-label">Phone number</label>
+                    <input type="text" name="phone" required class="form-control" id="senderPhoneInput" placeholder="E.g. +45 12 34 56 78">
+                </div>
+                <div class="mb-3">
+                    <label for="senderEmailInput" class="form-label">Email</label>
+                    <input type="email" name="email" required class="form-control" id="senderEmailInput" placeholder="E.g. email@domain.com">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</form>

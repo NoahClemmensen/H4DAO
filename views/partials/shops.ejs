@@ -1,0 +1,87 @@
+<section>
+    <h1>Shops</h1>
+    <button class="btn btn-success" style="width: fit-content" data-bs-toggle="modal" data-bs-target="#shopModal">
+        New shop
+    </button>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Zipcode</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Position</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% shops.forEach(function(shop) { %>
+            <tr>
+                <td><%= shop['id'] %></td>
+                <td><%= shop['name'] %></td>
+                <td><%= shop['address'] %></td>
+                <td><%= shop['zip_code'] %></td>
+                <td><%= shop['phone'] %></td>
+                <td><%= shop['email'] %></td>
+                <td>
+                    <div class="d-flex flex-column">
+                        <span>Latitude: <%= shop['latitude'] %></span>
+                        <span>Longitude: <%= shop['longitude'] %></span>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-outline-danger" id="deleteShop" data-id="<%= shop['id'] %>">Delete</button>
+                </td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+</section>
+
+
+<form class="modal fade" id="shopModal" tabindex="-1" aria-labelledby="shopModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="shopModalLabel">New shop</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="shopNameInput" class="form-label">Name</label>
+                    <input type="text" name="name" required class="form-control" id="shopNameInput" placeholder="E.g OK Tanken Odense">
+                </div>
+                <div class="mb-3">
+                    <label for="shopAddressInput" class="form-label">Address</label>
+                    <input type="text" name="address" required class="form-control" id="shopAddressInput" placeholder="E.g. Nørregade 1">
+                </div>
+                <div class="mb-3">
+                    <label for="shopZipcodeInput" class="form-label">Zipcode</label>
+                    <input type="number" name="zipcode" required class="form-control" id="shopZipcodeInput" placeholder="E.g. 5000">
+                </div>
+                <div class="mb-3">
+                    <label for="shopPhoneInput" class="form-label">Phone number</label>
+                    <input type="text" name="phone" required class="form-control" id="shopPhoneInput" placeholder="E.g. +45 12 34 56 78">
+                </div>
+                <div class="mb-3">
+                    <label for="shopEmailInput" class="form-label">Email</label>
+                    <input type="email" name="email" required class="form-control" id="shopEmailInput" placeholder="E.g. email@domain.com">
+                </div>
+                <div class="mb-3">
+                    <label for="shopLatitudeInput" class="form-label">Latitude</label>
+                    <input type="number" name="lat" required class="form-control" id="shopLatitudeInput" step="0.000001" placeholder="E.g. 55.39594">
+                </div>
+                <div class="mb-3">
+                    <label for="shopLongitudeInput" class="form-label">Longitude</label>
+                    <input type="number" name="lng" required class="form-control" id="shopLongitudeInput" step="0.000001" placeholder="E.g. 10.38831">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</form>

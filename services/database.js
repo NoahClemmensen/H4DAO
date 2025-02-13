@@ -22,8 +22,40 @@ class Database {
         return this.query('SELECT * FROM pending_packages');
     }
 
-    static async markPackageDelivered(packageId) {
+    static async getSenders() {
+        return this.query('SELECT * FROM sender where deleted = 0');
+    }
+
+    static async getShops() {
+        return this.query('SELECT * FROM shop where deleted = 0');
+    }
+
+    static async markDeliveryDelivered(packageId) {
         return this.queryProcedure('delivery_status_delivered(?)', [packageId]);
+    }
+
+    static async markDeliveryCanceled(packageId) {
+        return this.queryProcedure('delivery_status_canceled(?)', [packageId]);
+    }
+
+    static async deleteSender(senderId) {
+        return this.queryProcedure('delete_sender(?)', [senderId]);
+    }
+
+    static async deleteShop(shopId) {
+        return this.queryProcedure('delete_shop(?)', [shopId]);
+    }
+
+    static async createDelivery(shopId, senderId) {
+        return this.queryProcedure('create_delivery(?,?)', [shopId, senderId]);
+    }
+
+    static async createSender(name, address, zip, phone, email) {
+        return this.queryProcedure('create_sender(?,?,?,?,?)', [name, address, zip, phone, email]);
+    }
+
+    static async createShop(name, address, zip, phone, email, lat, lng) {
+        return this.queryProcedure('create_shop(?,?,?,?,?,?,?)', [name, address, zip, phone, email, lat, lng]);
     }
 
     static async query(sql, args) {

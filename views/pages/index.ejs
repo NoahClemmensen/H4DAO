@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+  <%- include('../partials/head', { title: title }) %>
+  <body>
+  <h1><%= title %></h1>
+  <p>Welcome to <%= title %> admin panel</p>
+  <%- include('../partials/deliveries', { deliveries: deliveries, shops: shops, senders: senders }) %>
+
+  <%- include('../partials/shops', { shops: shops }) %>
+
+    <%- include('../partials/senders', { senders: senders }) %>
+
+  <%- include('../partials/scripts') %>
+  </body>
+</html>
