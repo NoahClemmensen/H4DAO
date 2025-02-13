@@ -95,14 +95,28 @@ router.post('/createDelivery', async function(req, res, next) {
 });
 
 router.get('/getDeliveries', async function(req, res, next) {
-  const deliveries = await Database.getDeliveries()
+  const deliveries = await Database.getDeliveries();
   res.json(deliveries);
 });
 
-router.get('/getPendingPackages', async function(req, res, next) {
-  const pendingPackages = await Database.getPendingPackages();
+router.get('/getPendingPackages/:shopName', async function(req, res, next) {
+    const shopName = req.params.shopName;
+    const pendingPackages = await Database.getPendingPackages(shopName);
 
-  res.json(pendingPackages);
+    console.log(pendingPackages);
+
+    res.json(pendingPackages);
+});
+
+router.post('/startDelivery/:id', async function(req, res, next) {
+    const packageId = req.params.id;
+
+    try {
+        const result = await Database.markDeliveryPending(packageId);
+        res.json(result);
+    } catch (e) {
+        res.status(500).json({message: 'Failed to start delivery', error: e});
+    }
 });
 
 router.post('/cancelDelivery/:id', async function(req, res, next) {

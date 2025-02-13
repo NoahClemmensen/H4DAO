@@ -18,8 +18,8 @@ class Database {
         return this.query('SELECT * FROM delivery_view');
     }
 
-    static async getPendingPackages() {
-        return this.query('SELECT * FROM pending_packages');
+    static async getPendingPackages(shopName) {
+        return this.query('SELECT * FROM pending_packages WHERE shop_name = ?', [shopName]);
     }
 
     static async getSenders() {
@@ -36,6 +36,10 @@ class Database {
 
     static async markDeliveryCanceled(packageId) {
         return this.queryProcedure('delivery_status_canceled(?)', [packageId]);
+    }
+
+    static async markDeliveryPending(packageId) {
+        return this.queryProcedure('delivery_status_pending(?)', [packageId]);
     }
 
     static async deleteSender(senderId) {

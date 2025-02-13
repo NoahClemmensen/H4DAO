@@ -20,12 +20,25 @@ $(document).ready(function(){
         });
     });
 
-    $('#deleteDelivery').on('click', function(e) {
+    $('.deleteDelivery').on('click', function(e) {
         console.log('delete');
        // Ajax the API
         $.ajax({
             type: 'POST',
             url: '/cancelDelivery/' + $(this).data('id'),
+            success: function(data) {
+                console.log(data);
+                location.reload();
+            }
+        })
+    });
+
+    $('.startDelivery').on('click', function(e) {
+        console.log('start');
+       // Ajax the API
+        $.ajax({
+            type: 'POST',
+            url: '/startDelivery/' + $(this).data('id'),
             success: function(data) {
                 console.log(data);
                 location.reload();
@@ -57,7 +70,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#deleteShop').on('click', function(e) {
+    $('.deleteShop').on('click', function(e) {
         console.log('delete');
        // Ajax the API
         $.ajax({
@@ -92,7 +105,7 @@ $(document).ready(function(){
         });
     });
 
-    $('#deleteSender').on('click', function(e) {
+    $('.deleteSender').on('click', function(e) {
         console.log('delete');
        // Ajax the API
         $.ajax({

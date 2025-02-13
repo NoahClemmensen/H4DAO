@@ -23,7 +23,10 @@
                 <td><%= delivery['shop_name'] %></td>
                 <td><%= delivery['sender_name'] %></td>
                 <td>
-                    <button class="btn btn-outline-danger" id="deleteDelivery" data-id="<%= delivery['barcode'] %>">Delete</button>
+                    <button class="btn btn-outline-danger deleteDelivery" data-id="<%= delivery['barcode'] %>">Delete</button>
+                    <% if (delivery['delivery_status'] === 'Created') { %>
+                        <button class="btn btn-outline-success startDelivery" data-id="<%= delivery['barcode'] %>">Start</button>
+                    <% } %>
                 </td>
             </tr>
         <% }) %>
